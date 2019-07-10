@@ -5,21 +5,20 @@ class Solution:
     """
     def findMin(self, nums):
         
-        length = len(nums)
+        if not nums:
+            return -1
         
-        for x in range(length):
+        head_index = 0
+        tail_index = len(nums)-1
+
+        while tail_index > head_index + 1:
             
-            left_index = x-1
-            right_index = x+1
+            mid_index = (head_index+tail_index)//2
             
-            if left_index < 0:
-                left_index = 0
-            
-            if right_index >= length:
-                right_index = length-1
-            
-            if nums[left_index] > nums[x] and nums[x] < nums[right_index]:
-                return nums[x]
+            if nums[mid_index] > nums[tail_index]:
+                head_index = mid_index
                 
-                
-        return min(nums[0], nums[-1])
+            else:
+                tail_index = mid_index
+            
+        return min(nums[head_index], nums[tail_index])
